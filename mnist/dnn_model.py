@@ -30,7 +30,12 @@ def get_accuracy(logits, labels):
 
 
 # input placeholder
-X = tf.placeholder("float", [None, 784])
+raw_X = tf.placeholder(tf.string, shape=[None], name="raw_x")
+img_array = tf.map_fn(lambda i: tf.io.decode_png(i, channels=1), raw_X, dtype=tf.uint8)
+img_array = tf.cast(img_array, tf.float32)
+input_layer = tf.reshape(img_array, [-1, 784])
+
+X = tf.identity(input_layer, name="x")
 Y = tf.placeholder("float", [None, 10])
 
 logits = build_graph(X)

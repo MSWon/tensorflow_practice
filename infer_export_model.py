@@ -18,12 +18,12 @@ class ExportModel(object):
                 self._mapping.update(dict(metagraph.signature_def[signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY].outputs))
 
                 self.inputs = (
-                    self.sign2tensor("export/inputs"),
+                    self.sign2tensor("inputs"),
                 )
 
                 self.outputs = (
-                    self.sign2tensor("export/scores"),
-                    self.sign2tensor("export/outputs")
+                    self.sign2tensor("scores"),
+                    self.sign2tensor("outputs")
                 )
 
     def sign2tensor(self, sign_name):

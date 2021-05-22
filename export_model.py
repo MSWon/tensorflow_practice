@@ -1,7 +1,7 @@
 import tensorflow as tf
 import argparse
 from tensorflow.python.saved_model import signature_constants
-from mnist.dnn_model import X, scores, predictions
+from mnist.dnn_model import raw_X, X, scores, predictions
 
 """
 Usage:
@@ -15,13 +15,17 @@ parser.add_argument("--input-checkpoint", required=True)
 parser.add_argument("--saved-model-path", required=True)
 args = parser.parse_args()
 
-
+'''for using 'infer_export_model.py'
 inputs_candidate = {
-    "export/inputs": X 
+    "inputs": X
+}
+'''
+inputs_candidate = {
+    "raw_inputs": raw_X
 }
 outputs_candidate = {
-    "export/scores": scores,
-    "export/outputs": predictions
+    "scores": scores,
+    "outputs": predictions
 }
 
 var_list = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
